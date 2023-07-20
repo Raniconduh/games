@@ -14,14 +14,14 @@
 #define DELAY 100
 
 // enable or disable solid walls
-#define WALLS true
+#define WALLS false
 /* END CONFIG */
 
 
 #if WALLS
 #define WALLC '#'
 #else
-#define WALLC ''
+#define WALLC ' '
 #endif
 
 
@@ -185,7 +185,7 @@ int main() {
 				}
 
 				// teleport the snake in no-walls mode
-				if (MODE == NOWALLS) {
+				if (!WALLS) {
 					if (n->x < 0) n->x = X - 1;
 					else if (n->x >= X) n->x = 0;
 					
@@ -202,7 +202,7 @@ int main() {
 			}
 
 			// handle wall crash
-			if (MODE == WALLS && (s.nodes->x < 0 || s.nodes->x >= X || s.nodes->y < 0 || s.nodes->y >= Y)) {
+			if (WALLS && (s.nodes->x < 0 || s.nodes->x >= X || s.nodes->y < 0 || s.nodes->y >= Y)) {
 				state = WALL_CRASH;
 				goto done;
 			}
