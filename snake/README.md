@@ -1,6 +1,6 @@
 # snake
 
-Classic snake game. Move with arrow keys, eat the apples to grow longer.
+Classic snake game. Move with arrow keys, eat the apples to grow longer. Space to pause, any key to resume. q to quit.
 
 
 ## Config
