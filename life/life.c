@@ -4,13 +4,25 @@
 
 
 /* BEGIN CONFIG */
+#ifndef Y
 #define Y 16
+#endif /* Y */
+
+#ifndef X
 #define X 16
+#endif /* X */
 
+#ifndef DELAY
 #define DELAY 250
+#endif /* DELAY */
 
+#ifndef LIVE_C
 #define LIVE_C '#'
+#endif /* LIVE_C */
+
+#ifndef DEAD_C
 #define DEAD_C ' '
+#endif /* DEAD_C */
 /* END CONFIG */
 
 

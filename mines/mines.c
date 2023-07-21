@@ -6,15 +6,23 @@
 
 
 /* BEGIN CONFIG */
-// grid size
+#ifndef Y
 #define Y 16
-#define X 16
+#endif /* Y */
 
+#ifndef X
+#define X 16
+#endif /* X */
+
+#ifndef MINES
 // number of mines
 #define MINES 35
+#endif /* MINES */
 
+#ifndef HIGHLIGHT_SQUARES
 // reverse the highlighting of squares
 #define HIGHLIGHT_SQUARES true
+#endif /* HIGHLIGHT_SQUARES */
 /* END CONFIG */
 
 

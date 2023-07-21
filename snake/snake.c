@@ -7,14 +7,23 @@
 
 
 /* BEGIN CONFIG */
+#ifndef Y
 #define Y 16
-#define X 32
+#endif /* Y */
 
+#ifndef X
+#define X 32
+#endif /* X */
+
+#ifndef DELAY
 // time between movements (ms)
 #define DELAY 100
+#endif /* DELAY */
 
+#ifndef WALLS
 // enable or disable solid walls
 #define WALLS false
+#endif /* WALLS */
 /* END CONFIG */
 
 
