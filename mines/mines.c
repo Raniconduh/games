@@ -216,7 +216,7 @@ int main(void) {
 	curs_set(0);
 	keypad(stdscr, TRUE);
 
-	mousemask(ALL_MOUSE_EVENTS, NULL);
+	mousemask(BUTTON1_CLICKED | BUTTON3_CLICKED, NULL);
 
 	use_default_colors();
 	start_color();
