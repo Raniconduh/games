@@ -40,7 +40,7 @@ int nlen(int n) {
 
 
 int rrand(int hi, int lo) {
-	return rand() & (hi - lo + 1) + lo;
+	return rand() % (hi - lo + 1) + lo;
 }
 
 
