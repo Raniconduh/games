@@ -41,6 +41,9 @@
 #define ISPOP(g) (g & POP)
 #define GETGEM(g) (g & 0xFF)
 
+#define GETCOLOR(g) (COLOR_PAIR(g + 1))
+#define VALID(x, y) (x < X && y < Y && x >= 0 && y >= 0)
+
 
 enum gem {
 	SQUARE,
@@ -83,16 +86,6 @@ struct coord first = {-1, -1};
 int score = 0;
 
 
-inline int getcolor(enum gem g) {
-	return COLOR_PAIR(g + 1);
-}
-
-
-inline bool valid(int x, int y) {
-	return x < X && y < Y && x >= 0 && y >= 0;
-}
-
-
 int abs(int n) {
 	return n < 0 ? -n : n;
 }
@@ -116,8 +109,8 @@ void newgem(struct coord c) {
 	do {
 		done = true;
 		grid[x][y] = rand() % LAST_GEM;
-		if (valid(x - 1, y) && grid[x][y] == grid[x - 1][y]) done = false;
-		if (valid(x, y - 1) && grid[x][y] == grid[x][y - 1]) done = false;
+		if (VALID(x - 1, y) && grid[x][y] == grid[x - 1][y]) done = false;
+		if (VALID(x, y - 1) && grid[x][y] == grid[x][y - 1]) done = false;
 	} while (!done);
 }
 
@@ -129,7 +122,7 @@ void display(void) {
 	for (int y = 0; y < Y; y++) {
 		for (int x = 0; x < X; x++) {
 			addstr("| ");
-			int cp = getcolor(GETGEM(grid[x][y]));
+			int cp = GETCOLOR(GETGEM(grid[x][y]));
 			bool reverse = false;
 			if (HIGHLIGHT) reverse = true;;
 			if (first.x == x && first.y == y) reverse = !reverse;
@@ -160,12 +153,12 @@ int checkvert(int x, int y, struct coord vc[]) {
 	int s = 0;
 
 	int n = y;
-	while (valid(x, n) && grid[x][n] == grid[x][y]) {
+	while (VALID(x, n) && grid[x][n] == grid[x][y]) {
 		vc[s++] = (struct coord){x, n};
 		n++;
 	}
 	n = y - 1;
-	while (valid(x, n) && grid[x][n] == grid[x][y]) {
+	while (VALID(x, n) && grid[x][n] == grid[x][y]) {
 		vc[s++] = (struct coord){x, n};
 		n--;
 	}
@@ -178,12 +171,12 @@ int checkhoriz(int x, int y, struct coord hc[]) {
 	int s = 0;
 
 	int n = x;
-	while (valid(n, y) && grid[n][y] == grid[x][y]) {
+	while (VALID(n, y) && grid[n][y] == grid[x][y]) {
 		hc[s++] = (struct coord){n, y};
 		n++;
 	}
 	n = x - 1;
-	while (valid(n, y) && grid[n][y] == grid[x][y]) {
+	while (VALID(n, y) && grid[n][y] == grid[x][y]) {
 		hc[s++] = (struct coord){n, y};
 		n--;
 	}
@@ -268,12 +261,12 @@ int main(void) {
 					MEVENT e;
 					if (getmouse(&e) != OK) break;
 
-					// get and validate x and y coords
+					// get and VALIDate x and y coords
 					if (e.x % 4 == 0 || e.y % 2 == 0) break;
 					int x = (e.x - 2) / 4;
 					int y = (e.y - 1) / 2;
 					if ((e.x - 1) % 4 == 0) x++;
-					if (!valid(x, y)) break;
+					if (!VALID(x, y)) break;
 
 					if (first.x == -1 && first.y == -1) {
 						first.x = x;
