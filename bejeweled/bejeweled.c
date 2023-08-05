@@ -378,6 +378,7 @@ int main(void) {
 								}
 
 								if (r >= 3) {
+									nc += r;
 									first = invc;
 									makepop(rc, r);
 									display();
