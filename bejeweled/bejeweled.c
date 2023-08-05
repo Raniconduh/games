@@ -28,6 +28,10 @@
 #define BAD_MATCH_DELAY 750
 #endif /* BAD_MATCH_DELAY */
 
+#ifndef GRID
+#define GRID true
+#endif /* GRID */
+
 #define SQUARE_C   '#'
 #define CIRCLE_C   'O'
 #define TRIANGLE_C 'A'
@@ -117,11 +121,14 @@ void newgem(struct coord c) {
 
 void display(void) {
 	erase();
-	for (int x = 0; x < X; x++) addstr("+ - ");
-	addstr("+\n");
+	if (GRID) {
+		for (int x = 0; x < X; x++) addstr("+ - ");
+		addstr("+\n");
+	} else addch('\n');
 	for (int y = 0; y < Y; y++) {
 		for (int x = 0; x < X; x++) {
-			addstr("| ");
+			if (GRID) addstr("| ");
+			else addstr("  ");
 			int cp = GETCOLOR(GETGEM(grid[x][y]));
 			bool reverse = false;
 			if (HIGHLIGHT) reverse = true;;
@@ -133,9 +140,11 @@ void display(void) {
 			attroff(cp);
 			addch(' ');
 		}
-		addstr("|\n");
-		for (int x = 0; x < X; x++) addstr("+ - ");
-		addstr("+\n");
+		if (GRID) {
+			addstr("|\n");
+			for (int x = 0; x < X; x++) addstr("+ - ");
+			addstr("+\n");
+		} else addstr("\n\n");
 	}
 
 	attron(A_REVERSE);
@@ -294,27 +303,35 @@ int main(void) {
 					struct coord hc[X];
 					int h = checkhoriz(x, y, hc);
 
+					struct coord rc[Y + X];
+					int r = 0;
 					if (v >= 3) {
-						first = invc;
 						sort(vc, v);
-						makepop(vc, v);
-						display();
-						napms(MATCH_DELAY);
-						shift(vc, v);
+						while (v--) {
+							rc[r] = vc[r];
+							r++;
+						}
+					}
 
-						score += 1000;
-						v -= 3;
-						score += 2000*v;
-					} else if (h >= 3) {
+					if (h >= 3) {
+						int i = 0;
+						while (h--) {
+							rc[r] = hc[i];
+							i++;
+							r++;
+						}
+					}
+
+					if (r >= 3) {
 						first = invc;
-						makepop(hc, h);
+						makepop(rc, r);
 						display();
 						napms(MATCH_DELAY);
-						shift(hc, h);
+						shift(rc, r);
 
 						score += 1000;
-						h -= 3;
-						score += 2000*h;
+						r -= 3;
+						score += 2000*r*r;
 					} else {
 						// no matches
 						struct coord c = first;
@@ -341,29 +358,35 @@ int main(void) {
 								int v = checkvert(nx, ny, vc);
 								struct coord hc[X];
 								int h = checkhoriz(nx, ny, hc);
+								struct coord rc[Y + X];
+								int r = 0;
 								if (v >= 3) {
-									nc += v;
-
 									sort(vc, v);
-									makepop(vc, v);
+									while (v--) {
+										rc[r] = vc[r];
+										r++;
+									}
+								}
+
+								if (h >= 3) {
+									int i = 0;
+									while (h--) {
+										rc[r] = hc[i];
+										i++;
+										r++;
+									}
+								}
+
+								if (r >= 3) {
+									first = invc;
+									makepop(rc, r);
 									display();
-									napms(750);
-									shift(vc, v);
+									napms(MATCH_DELAY);
+									shift(rc, r);
 
 									score += 1000;
-									v -= 3;
-									score += 2000*v;
-								} else if (h >= 3) {
-									nc += h;
-
-									makepop(hc, h);
-									display();
-									napms(750);
-									shift(hc, h);
-
-									score += 1000;
-									h -= 3;
-									score += 2000*h;
+									r -= 3;
+									score += 2000*r*r;
 								}
 							}
 						}

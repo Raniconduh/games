@@ -10,3 +10,4 @@ Tile match game. Click on a tile to select it, click on another tile directly ad
 * `SHIFT_DELAY`: The delay between shifts of tiles above each other when a match is made
 * `MATCH_DELAY`: The delay after a successful match
 * `BAD_MATCH_DELAY`: The delay after a non successful match
+* `GRID`: Either `true` or `false`, whether or not to show the grid outline
