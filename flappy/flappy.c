@@ -163,6 +163,7 @@ int main() {
 				attroff(A_REVERSE);
 				refresh();
 
+				napms(500);
 				if (getch() == 'q') goto terminate;
 				break;
 			default: break;
