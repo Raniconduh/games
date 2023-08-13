@@ -1,3 +1,4 @@
+#include <time.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ncurses.h>
@@ -24,7 +25,6 @@
 #endif /* HIGHLIGHT_SQUARES */
 
 #ifndef SEED
-#include <time.h>
 #define SEED time(NULL)
 #endif /* SEED */
 /* END CONFIG */
