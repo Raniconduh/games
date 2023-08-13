@@ -11,3 +11,4 @@ Tile match game. Click on a tile to select it, click on another tile directly ad
 * `MATCH_DELAY`: The delay after a successful match
 * `BAD_MATCH_DELAY`: The delay after a non successful match
 * `GRID`: Either `true` or `false`, whether or not to show the grid outline
+* `SEED`: Seed value for PRNG

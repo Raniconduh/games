@@ -1,4 +1,3 @@
-#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
@@ -24,6 +23,11 @@
 // enable or disable solid walls
 #define WALLS false
 #endif /* WALLS */
+
+#ifndef SEED
+#include <time.h>
+#define SEED time(NULL)
+#endif /* SEED */
 /* END CONFIG */
 
 
@@ -95,7 +99,7 @@ int nlen(int n) {
 
 
 int main() {
-	srand(time(NULL));
+	srand(SEED);
 
 	initscr();
 	noecho();

@@ -8,3 +8,4 @@ Minesweeper. Left click reveals a square, right click flags it. `f` toggles "fla
 * `X`: Minefield width
 * `MINES`: Number of mines
 * `HIGHLIGHT_SQUARES`: Either `true` or `false`. Enables or disables highlighting of number squares
+* `SEED`: Seed value for PRNG

@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdbool.h>
-#include <time.h>
 #include <ncurses.h>
 #include <string.h>
 
@@ -23,6 +22,11 @@
 // reverse the highlighting of squares
 #define HIGHLIGHT_SQUARES true
 #endif /* HIGHLIGHT_SQUARES */
+
+#ifndef SEED
+#include <time.h>
+#define SEED time(NULL)
+#endif /* SEED */
 /* END CONFIG */
 
 
@@ -209,7 +213,7 @@ int nlen(int n) {
 
 
 int main(void) {
-	srand(time(NULL));
+	srand(SEED);
 
 	initscr();
 	noecho();

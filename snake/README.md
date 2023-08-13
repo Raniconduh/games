@@ -9,3 +9,4 @@ Classic snake game. Move with arrow keys, eat the apples to grow longer. Space t
 * `X`: Width of play area
 * `DELAY`: The delay, in milliseconds, between each movement
 * `WALLS`: Either `true` or `false`. If `true`, enable solid walls (game over on crash). Otherwise, allow snake to teleport through walls.
+* `SEED`: Seed value for PRNG

@@ -1,9 +1,9 @@
-#include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
 #include <stdbool.h>
 
 
+/* BEGIN CONFIG */
 #ifndef HIGHLIGHT
 #define HIGHLIGHT false
 #endif /* HIGHLIGHT */
@@ -31,6 +31,12 @@
 #ifndef GRID
 #define GRID true
 #endif /* GRID */
+
+#ifndef SEED
+#include <time.h>
+#define SEED time(NULL)
+#endif /* SEED */
+/* END CONFIG */
 
 #define SQUARE_C   '#'
 #define CIRCLE_C   'O'
@@ -230,7 +236,7 @@ void sort(struct coord s[], int n) {
 
 
 int main(void) {
-	srand(time(NULL));
+	srand(SEED);
 
 	initscr();
 	noecho();

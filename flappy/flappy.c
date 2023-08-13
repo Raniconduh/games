@@ -1,7 +1,14 @@
-#include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
 #include <stdbool.h>
+
+
+/* BEGIN CONFIG */
+#ifndef SEED
+#include <time.h>
+#define SEED time(NULL)
+#endif /* SEED */
+/* END CONFIG */
 
 
 #define X COLS
@@ -45,7 +52,7 @@ int rrand(int hi, int lo) {
 
 
 int main() {
-	srand(time(NULL));
+	srand(SEED);
 
 	initscr();
 	noecho();
