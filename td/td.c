@@ -903,7 +903,7 @@ int main(void) {
 						for (int i = 0; i < spawned_turrets.idx; i++) {
 							x = spawned_turrets.spawned[i].x;
 							y = spawned_turrets.spawned[i].y;
-							if (x != e.x - 1 && y != e.y - 1) continue;
+							if (x != e.x - 1 || y != e.y - 1) continue;
 							
 							tid = i;
 							break;
